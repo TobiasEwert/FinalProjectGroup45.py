@@ -1,29 +1,55 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog as fd
+from tkinter.messagebox import showinfo
+from pydub import AudioSegment
+from ffmpeg import *
 
-plt.figure(figsize=(14,10))
+gfile = ''
+# create the root window
+root = tk.Tk()
+root.title('Tkinter Open File Dialog')
+root.resizable(False, False)
+root.geometry('300x150')
 
-def show_frequency(x, y, i):
-  plt.subplot(3, 1, i)
-  plt.stem(x, y, 'r', use_line_collection=True)
-  plt.plot(x, y)
-  plt.xlabel("time")
-  plt.ylabel("amplitude")
-  plt.grid()
+'''
+tkinter.filedialog.askopenfilenames(**options)
+Create an Open dialog and 
+return the selected filename(s) that correspond to 
+existing file(s).
+'''
+def select_file():
+    filetypes = (
+        ('Audio files', '*.mp3'),
+        ('All files', '*.*')
+    )
 
-frequency = 3
-samples = 100
-x = np.arange(samples)
-y1 = np.sin(2*np.pi*frequency*(x/samples))
+    filename = fd.askopenfilename(
+        title='Open a file',
+        initialdir='/',
+        filetypes=filetypes)
 
-frequency2 = 3
-y2 = frequency2 * np.sin(2*np.pi*frequency2*(x/samples))
+    gfile = filename
 
-# compose a new curve
-ys = y1 + y2
+    # tkinter.messagebox — Tkinter message prompts
+    showinfo(
+        title='Selected File',
+        message=filename
+    )
 
-show_frequency(x, y1, 1)
-show_frequency(x, y2, 2)
-show_frequency(x, ys, 3)
+    gfile_label = ttk.Label(root, text=gfile)
+    gfile_label.pack(side="bottom")
 
-plt.show()
+
+# open button
+open_button = ttk.Button(
+    root,
+    text='Open a File',
+    command=select_file
+)
+
+open_button.pack(expand=True)
+
+
+# run the application
+root.mainloop()
