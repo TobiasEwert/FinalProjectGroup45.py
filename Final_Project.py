@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
-from pydub import AudioSegment
-from ffmpeg import *
 
 gfile = ''
 # create the root window
@@ -53,5 +51,3 @@ open_button.pack(expand=True)
 
 # run the application
 root.mainloop()
-
-#testing
