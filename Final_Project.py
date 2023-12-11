@@ -32,6 +32,7 @@ Create an Open dialog and
 return the selected filename(s) that correspond to 
 existing file(s).
 '''
+#finds the RT60 values
 def compute_rt60(frequencies, power, band):
     if band == 'low':
         freq_band = (20, 200)
@@ -51,11 +52,13 @@ def compute_rt60(frequencies, power, band):
         return frequencies[rt60_index]
     else:
         return None
+#converts into a single channel        
 def to_single_channel(filename):
     raw_audio = AudioSegment.from_file(filename, format="wav")
     channel_count = raw_audio.channels
     mono_wav = raw_audio.set_channels(1)
     mono_wav.export(filename, format="wav")
+#Checks if the file is .wav, if not converts it
 def convert_to_wav(filename):
     main, extension = path.splitext(filename)
     if extension != ".wav":
@@ -198,6 +201,7 @@ def select_file():
             title='Filetype not supported',
             message='Please select a supported audio file type.'
         )
+#button for switching frequencies        
 def switch_frequency_band():
     global current_frequency_band, canvas_low, canvas_mid, canvas_high
 
