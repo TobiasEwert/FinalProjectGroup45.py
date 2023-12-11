@@ -23,6 +23,11 @@ Create an Open dialog and
 return the selected filename(s) that correspond to 
 existing file(s).
 '''
+def to_single_channel(filename):
+    raw_audio = AudioSegment.from_file(filename, format="wav")
+    channel_count = raw_audio.channels
+    mono_wav = raw_audio.set_channels(1)
+    mono_wav.export(filename, format="wav")
 def convert_to_wav(filename):
     main, extension = path.splitext(filename)
     if extension != ".wav":
@@ -32,6 +37,7 @@ def convert_to_wav(filename):
         gfile = main + extension
     else:
         gfile = filename
+    to_single_channel(gfile)
     return gfile
 def select_file():
     filetypes = (
