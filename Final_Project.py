@@ -217,6 +217,31 @@ def switch_frequency_band():
         canvas_mid.get_tk_widget().pack_forget()
         canvas_high.get_tk_widget().pack_forget()
 
+#attempt to merge plots
+#def super_plot():
+#    figs, ax = plt.subplots()
+
+#    ax.set_title("Combination plot")
+
+#    ax.set_xlabel("Frequency (Hz)")
+#    ax.set_ylabel("Power Spectral Density")
+
+#    la1, = ax.draw(plt_low)
+#    la1.set_label("Low Frequencies")
+
+#    la2, = ax.draw(canvas_mid)
+#    la2.set_label("Mid Frequencies")
+
+#    la3, = ax.draw(canvas_high)
+#    la3.set_label("High frequencies")
+#
+#    ax.legend()
+
+#super_button = Button(
+#    root,
+#    text = 'Merge the graphs',
+#    command = super_plot
+#)
 
 # open button
 open_button = Button(
